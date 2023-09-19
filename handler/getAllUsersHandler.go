@@ -16,6 +16,7 @@ func GetAllUsersHandler(ctx *gin.Context) {
 		return
 	}
 
+	// response formatting
 	response := []UserResponse{}
 
 	for _, u := range users {

@@ -5,6 +5,7 @@ import (
 
 	"github.com/Ticolls/go-auth/schemas"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func RegisterUserHandler(ctx *gin.Context) {
@@ -20,25 +21,31 @@ func RegisterUserHandler(ctx *gin.Context) {
 	}
 
 	//Hashpassword logic
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(request.Password), 14)
+
+	if err != nil {
+		logger.Errorf("error hashing the password: %v", err.Error())
+		sendError(ctx, http.StatusInternalServerError, err.Error())
+	}
 
 	user := schemas.User{
 		Name:     request.Name,
 		Email:    request.Email,
-		Password: request.Password,
+		Password: string(hashedPassword),
 	}
 
 	if err := db.Create(&user).Error; err != nil {
 		logger.Errorf("error creating user: %v", err.Error())
-		sendError(ctx, http.StatusBadRequest, err.Error())
+		sendError(ctx, http.StatusInternalServerError, err.Error())
 		return
 	}
 
+	// response formatting
 	response := RegisterUserResponse{
 		ID:        user.ID,
 		CreatedAt: user.CreatedAt,
 		Name:      user.Name,
 		Email:     user.Email,
-		Password:  user.Password,
 	}
 
 	sendSuccess(ctx, "register-user", &response)
