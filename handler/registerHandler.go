@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"net/http"
-
 	"github.com/Ticolls/go-auth/schemas"
 	"github.com/gin-gonic/gin"
 )
@@ -31,8 +29,6 @@ func RegisterHandler(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, gin.H{
-		"data": user,
-	})
+	sendSuccess(ctx, "register-user", user)
 
 }
