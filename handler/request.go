@@ -30,3 +30,23 @@ func (user *registerUserRequest) validate() error {
 
 	return nil
 }
+
+type loginUserRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+func (user *loginUserRequest) validate() error {
+
+	if user.Email == "" && user.Password == "" {
+		return fmt.Errorf("request body is empty or malformed")
+	}
+	if user.Email == "" {
+		return errParamIsRequired("email", "string")
+	}
+	if user.Password == "" {
+		return errParamIsRequired("password", "string")
+	}
+
+	return nil
+}
