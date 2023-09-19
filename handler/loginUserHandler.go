@@ -2,12 +2,9 @@ package handler
 
 import (
 	"net/http"
-	"os"
-	"strconv"
-	"time"
 
 	"github.com/Ticolls/go-auth/schemas"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/Ticolls/go-auth/utils"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -41,14 +38,7 @@ func LoginUserHandler(ctx *gin.Context) {
 	}
 
 	// JWT token
-	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    strconv.Itoa(int(user.ID)),
-		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(), // 1 day
-	})
-
-	secret := os.Getenv("SECRET_KEY")
-
-	token, err := claims.SignedString([]byte(secret))
+	token, err := utils.GenerateToken(user.ID)
 
 	if err != nil {
 		logger.Errorf("jwt error: %v", passErr.Error())
