@@ -16,5 +16,6 @@ func initializeRoutes(router *gin.Engine) {
 		v1.GET("/user", handler.GetAllUsersHandler)
 		v1.POST("/register", handler.RegisterUserHandler)
 		v1.POST("/login", handler.LoginUserHandler)
+		v1.GET("/auth", handler.AuthHandler)
 	}
 }

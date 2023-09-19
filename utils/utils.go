@@ -20,3 +20,18 @@ func GenerateToken(id uint) (string, error) {
 
 	return token, err
 }
+
+func ValidateToken(cookie string) (string, error) {
+
+	secret := os.Getenv("SECRET_KEY")
+
+	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(t *jwt.Token) (interface{}, error) {
+		return []byte(secret), nil
+	})
+
+	claims := token.Claims.(*jwt.StandardClaims)
+
+	id := claims.Issuer
+
+	return id, err
+}
