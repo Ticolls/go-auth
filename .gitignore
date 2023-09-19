@@ -4,6 +4,9 @@
 *.so
 *.dylib
 
+# env
+/.env
+
 
 # Test binary
 *.test

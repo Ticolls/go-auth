@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserResponse struct {
+type userResponse struct {
 	ID        uint      `json:"id"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
@@ -18,21 +18,20 @@ type UserResponse struct {
 	DeletedAt time.Time `json:"deletedAt,omitempty"`
 }
 
-type RegisterUserResponse struct {
+type registerUserResponse struct {
 	ID        uint      `json:"id"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	CreatedAt time.Time `json:"createdAt"`
 }
 
-type LoginUserResponse struct {
-	ID       uint   `json:"id"`
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+type loginUserResponse struct {
+	ID    uint   `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
 }
 
-type UpdateUserResponse struct {
+type updateUserResponse struct {
 	ID        uint      `json:"id"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
@@ -40,7 +39,7 @@ type UpdateUserResponse struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
-type DeleteUserResponse struct {
+type deleteUserResponse struct {
 	ID        uint      `json:"id"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`

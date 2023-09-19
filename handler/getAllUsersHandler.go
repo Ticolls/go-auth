@@ -17,10 +17,10 @@ func GetAllUsersHandler(ctx *gin.Context) {
 	}
 
 	// response formatting
-	response := []UserResponse{}
+	response := []userResponse{}
 
 	for _, u := range users {
-		response = append(response, UserResponse{
+		response = append(response, userResponse{
 			ID:        u.ID,
 			Name:      u.Name,
 			Email:     u.Email,

@@ -3,6 +3,7 @@ module github.com/Ticolls/go-auth
 go 1.21.0
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.9.1
 	gorm.io/driver/sqlite v1.5.3
 	gorm.io/gorm v1.25.4

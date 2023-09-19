@@ -41,7 +41,7 @@ func RegisterUserHandler(ctx *gin.Context) {
 	}
 
 	// response formatting
-	response := RegisterUserResponse{
+	response := registerUserResponse{
 		ID:        user.ID,
 		CreatedAt: user.CreatedAt,
 		Name:      user.Name,
