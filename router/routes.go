@@ -13,6 +13,6 @@ func initializeRoutes(router *gin.Engine) {
 
 	v1 := router.Group(basePath)
 	{
-		v1.GET("/auth", handler.AuthHandler)
+		v1.POST("/register", handler.RegisterHandler)
 	}
 }
