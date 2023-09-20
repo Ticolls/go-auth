@@ -4,24 +4,14 @@ import (
 	"net/http"
 
 	"github.com/Ticolls/go-auth/schemas"
-	"github.com/Ticolls/go-auth/utils"
 	"github.com/gin-gonic/gin"
 )
 
 func AuthHandler(ctx *gin.Context) {
-	cookie, err := ctx.Cookie("jwt")
 
-	if err != nil {
-		logger.Errorf("cookie error: %v", err)
-		sendError(ctx, http.StatusUnauthorized, "você não tem permissão para entrar aqui.")
-		return
-	}
+	id, exists := ctx.Get("id")
 
-	id, err := utils.ValidateToken(cookie)
-
-	if err != nil {
-		logger.Errorf("jwt error: %v", err)
-		sendError(ctx, http.StatusUnauthorized, "você não tem permissão para entrar aqui.")
+	if !exists {
 		return
 	}
 
