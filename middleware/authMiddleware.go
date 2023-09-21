@@ -23,6 +23,7 @@ func AuthMiddleware() gin.HandlerFunc {
 				"message":   "você não tem permissão para entrar aqui.",
 				"errorCode": http.StatusUnauthorized,
 			})
+			ctx.Abort()
 			return
 		}
 
@@ -35,10 +36,12 @@ func AuthMiddleware() gin.HandlerFunc {
 				"message":   "você não tem permissão para entrar aqui.",
 				"errorCode": http.StatusUnauthorized,
 			})
+			ctx.Abort()
 			return
 		}
 
 		ctx.Set("id", id)
+
 		ctx.Next()
 	}
 }
