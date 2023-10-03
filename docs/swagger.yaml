@@ -6,6 +6,13 @@ definitions:
       message:
         type: string
     type: object
+  handler.getAllUsersResponse:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/handler.loginUserResponse'
+        type: array
+    type: object
   handler.loginUserRequest:
     properties:
       email:
@@ -42,9 +49,49 @@ definitions:
       name:
         type: string
     type: object
+  handler.userResponse:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+      updatedAt:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
+  /auth:
+    get:
+      consumes:
+      - application/json
+      description: need authentication, first create a account and log in
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.userResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: get all logged user info
+      tags:
+      - user
   /login:
     post:
       consumes:
@@ -126,6 +173,25 @@ paths:
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
       summary: Register user
+      tags:
+      - user
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: get all users (need authentication)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.getAllUsersResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: get all users
       tags:
       - user
 swagger: "2.0"

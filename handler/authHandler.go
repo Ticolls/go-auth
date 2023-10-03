@@ -7,6 +7,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+
+// @Summary get all logged user info
+// @Description need authentication, first create a account and log in
+// @Tags user
+// @Accept json
+// @Produce json
+// @Success 200 {object} userResponse
+// @Failure 401 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /auth [get]
 func AuthHandler(ctx *gin.Context) {
 
 	id, exists := ctx.Get("id")
