@@ -8,6 +8,18 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// @BasePath /api/v1
+
+// @Summary Register user
+// @Description Create a new user
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param request body registerUserRequest true "Request body"
+// @Success 200 {object} registerUserResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /register [post]
 func RegisterUserHandler(ctx *gin.Context) {
 
 	request := registerUserRequest{}

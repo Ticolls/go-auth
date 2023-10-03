@@ -4,13 +4,17 @@ import (
 	"github.com/Ticolls/go-auth/handler"
 	"github.com/Ticolls/go-auth/middleware"
 	"github.com/gin-gonic/gin"
+	docs "github.com/Ticolls/go-auth/docs"
+   	swaggerfiles "github.com/swaggo/files"
+   	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func initializeRoutes(router *gin.Engine) {
 
-	basePath := "/api/v1"
-
 	handler.Init()
+	
+	basePath := "/api/v1"
+	docs.SwaggerInfo.BasePath = basePath
 
 	v1 := router.Group(basePath)
 	{
@@ -21,4 +25,6 @@ func initializeRoutes(router *gin.Engine) {
 		v1.GET("/logout", middleware.AuthMiddleware(), handler.LogoutUserHandler)
 	}
 
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 }
