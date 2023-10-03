@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Ticolls/go-auth/schemas"
@@ -9,7 +10,7 @@ import (
 
 // @BasePath /api/v1
 
-// @Summary get all users user
+// @Summary get all users
 // @Description get all users (need authentication)
 // @Tags user
 // @Accept json
@@ -17,7 +18,7 @@ import (
 // @Success 200 {object} getAllUsersResponse
 // @Failure 401 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
-// @Router /logout [get]
+// @Router /users [get]
 func GetAllUsersHandler(ctx *gin.Context) {
 
 	users := []schemas.User{}
@@ -31,16 +32,14 @@ func GetAllUsersHandler(ctx *gin.Context) {
 	response := getAllUsersResponse{}
 
 	for _, u := range users {
-		response.Users = append(response.Users, userResponse{
+		response.Users = append(response.Users, loginUserResponse{
 			ID:        u.ID,
 			Name:      u.Name,
 			Email:     u.Email,
-			Password:  u.Password,
-			CreatedAt: u.CreatedAt,
-			UpdatedAt: u.UpdatedAt,
-			DeletedAt: u.DeletedAt.Time,
 		})
 	}
+
+	fmt.Println(response)
 
 	sendSuccess(ctx, "get-all-users", response)
 }
