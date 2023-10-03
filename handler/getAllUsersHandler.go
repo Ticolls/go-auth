@@ -7,6 +7,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+
+// @Summary get all users user
+// @Description get all users (need authentication)
+// @Tags user
+// @Accept json
+// @Produce json
+// @Success 200 {object} getAllUsersResponse
+// @Failure 401 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /logout [get]
 func GetAllUsersHandler(ctx *gin.Context) {
 
 	users := []schemas.User{}
@@ -17,10 +28,10 @@ func GetAllUsersHandler(ctx *gin.Context) {
 	}
 
 	// response formatting
-	response := []userResponse{}
+	response := getAllUsersResponse{}
 
 	for _, u := range users {
-		response = append(response, userResponse{
+		response.Users = append(response.Users, userResponse{
 			ID:        u.ID,
 			Name:      u.Name,
 			Email:     u.Email,

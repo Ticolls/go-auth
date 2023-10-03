@@ -48,7 +48,7 @@ type deleteUserResponse struct {
 }
 
 type getAllUsersResponse struct {
-	Users []userResponse
+	Users []userResponse `json:"users"`
 }
 
 type ErrorResponse struct {
