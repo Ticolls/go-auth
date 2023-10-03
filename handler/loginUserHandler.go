@@ -16,7 +16,7 @@ import (
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param request body loginUserResponse true "Request body"
+// @Param request body loginUserRequest true "Request body"
 // @Success 200 {object} loginUserResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
