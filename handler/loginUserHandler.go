@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/Ticolls/go-auth/schemas"
 	"github.com/Ticolls/go-auth/utils"
@@ -58,8 +59,10 @@ func LoginUserHandler(ctx *gin.Context) {
 		return
 	}
 
+	host := os.Getenv("HOST")
+
 	// setting cookie
-	ctx.SetCookie("jwt", token, 3600*24, "/", "localhost", false, true)
+	ctx.SetCookie("jwt", token, 3600*24, "/", host, false, true)
 
 	// response formatting
 	response := loginUserResponse{
